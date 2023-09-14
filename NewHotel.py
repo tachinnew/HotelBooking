@@ -1,5 +1,6 @@
 import allRoom as room #mport the allroom that I write array there
 import member as mem #import member as mem for member point payment
+import temp as tm #import temp to add temp array to it
 
 def showAll(): #this is show all the room that we have
     number = 1 # make up some number to make it look good
@@ -7,6 +8,10 @@ def showAll(): #this is show all the room that we have
         print(number , end = " ")
         print(element)
         number += 1
+
+def showAllTrueRoom():
+    number = 1 
+    
 
 def add(): # this is function write to add new room to array and dict on allRoom.py
     showAll()
@@ -20,7 +25,7 @@ def add(): # this is function write to add new room to array and dict on allRoom
     room.roomPrice[newroom] = 300
     room.roomStatus[newroom] = True
 
-    staff_ui()
+    staff_ui() # make programstill runing by going back to staff page
 
 def delete(): # same as add but this time to delete it
     showAll()
@@ -57,7 +62,7 @@ def checkOut(): # same as check in but this time when user are check out
     showAll()
     CheckO = input("\nWhich room user wanna check out : ")
     if CheckO in room.roomAll: # check is input is on array or not
-        print(f"{CheckN} has already check in\n")
+        print(f"{CheckO} has already check in\n")
         room.roomStatus[CheckO] = True # make status of that room go to True
 
         staff_ui()# make programstill runing by going back to staff page
@@ -67,14 +72,14 @@ def checkOut(): # same as check in but this time when user are check out
         checkOut()
 
 def roomInfo(): # just make up room info
-    print(f"{room.roomAll[0]} - {room.roomAll[len(room.roomAll)/2]}") # the first half is 1 King bed
+    print("## Type 1 ##")
     print("1 King Bed")
     print("1 Bathtub")
     print("with Balcony")
 
     print("")
 
-    print(f"{room.roomAll[(len(room.roomAll)/2) + 1]} - {room.roomAll[len(room.roomAll)-1]}") # the second half is 2 bed
+    print("## Type 2 ##")
     print("2 Bed") 
     print("1 Bathtub")
     print("with Balcony")
@@ -86,8 +91,8 @@ def internetbanking(): # this is for internet banking playment
     print("are you done with payment")
     answer = input("(yes/no) : ")
     if answer == "yes":
-        print(f"complete booking {get_temp}") # make user know that they already complete booking
-        room.roomStatus[get_temp] = False # set status to false
+        print(f"complete booking {tm.get_temp}") # make user know that they already complete booking
+        room.roomStatus[tm.get_temp] = False # set status to false
     elif answer == "no":
         print("Are you really going to cancel the payment")
         answert = input("yes/no : ")
@@ -107,12 +112,13 @@ def internetbanking(): # this is for internet banking playment
 def memberP(): # for people who use member point for payment
     print("you choosing member point payment")
     print("you need to enter id and password first")
+    print("enter 99 to id to cancel everything")
 
     id = input("ID : ") # enter ID
     password = input(int("Password : ")) # enter password
 
     if id in mem.member: # check id which thatin array of ID or not
-        if mem.member[id].equal(password): # same as ID but password
+        if mem.member[id] in password: # same as ID but password
             if mem.memberPoint[id] >= 10: #check is there have enough point to pay or not
                 print("you already pay 10 point") 
                 mem.memberPoint[id] -= 10 # minus 10 point for payment
@@ -124,6 +130,10 @@ def memberP(): # for people who use member point for payment
         else:
             print("Worng Password!")
             memberP()
+
+    elif id == '99':
+        print("Going back to User menu")
+        user_ui()
     else:
         print("Worng ID!")
         memberP()
@@ -161,7 +171,7 @@ def room_booking(): #self booking
         elif yon == "no":
             print(f"you cancel booking {rbooking}")
             print(f"Going back to room booking {rbooking}")
-            room_booking()
+            user_ui()
 
         else:
             print("invalid Variable")
@@ -179,15 +189,15 @@ def staff_ui(): # just staff text interface
     print("## Type all the name of room colectly ##")
     staff = input("")
 
-    if(staff == 1):
-        checkIn()
-    elif(staff == 2):
+    if(staff == '1'):
+        checkIN()
+    elif(staff == '2'):
         checkOut()
-    elif (staff == 3):
+    elif (staff == '3'):
         delete()
-    elif(staff == 4):
+    elif(staff == '4'):
         add()
-    elif(staff == 99):
+    elif(staff == '99'):
         role_selecter()
     else:
         print("Invalid valiable\n")
@@ -201,16 +211,16 @@ def user_ui(): # just user text interface
     print("3 Book Room")
     user = input("")
 
-    if(staff == 1):
+    if(staff == '1'):
         showAll()
         user_ui()
-    elif(staff == 2):
+    elif(staff == '2'):
         roomInfo()
         user_ui()
-    elif(staff == 2):
+    elif(staff == '3'):
         room_booking()
         user_ui()
-    elif (user == 99):
+    elif (user == '99'):
         role_selecter()
     else:
         print("Invalid valiable\n")
