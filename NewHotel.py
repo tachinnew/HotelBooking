@@ -219,13 +219,13 @@ def user_ui(): # just user text interface
     print("3 Book Room")
     user = input("")
 
-    if(staff == '1'):
+    if(user == '1'):
         showAll()
         user_ui()
-    elif(staff == '2'):
+    elif(user == '2'):
         roomInfo()
         user_ui()
-    elif(staff == '3'):
+    elif(user == '3'):
         room_booking()
         user_ui()
     elif (user == '99'):
