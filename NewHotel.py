@@ -3,6 +3,7 @@ import member as mem #import member as mem for member point payment
 import temp as tm #import temp to add temp array to it
 
 def showAll(): #this is show all the room that we have
+    print("")
     number = 1 # make up some number to make it look good
     for element in room.roomAll: # loop to print data in array
         print(number , end = " ")
@@ -10,11 +11,13 @@ def showAll(): #this is show all the room that we have
         number += 1
 
 def showAllTrueRoom():
+    print("")
     number = 1 
     tm.check_true()
     for element in tm.temp_array:
-        print(number , end = "")
+        print(number , end = " ")
         print(element)
+        number += 1
     
 
 def add(): # this is function write to add new room to array and dict on allRoom.py
@@ -37,8 +40,8 @@ def delete(): # same as add but this time to delete it
     if rDel in room.roomAll:
         print(f"{rDel} has already delete\n")
         room.roomAll.remove(rDel)
-        room.roomPrice.remove(rDel)
-        room.roomStatus.remove(rDel)
+        del room.roomPrice[rDel]
+        del room.roomStatus[rDel]
 
         staff_ui() # make programstill runing by going back to staff page
 
@@ -89,14 +92,14 @@ def roomInfo(): # just make up room info
     print("with Balcony")
 
 def internetbanking(): # this is for internet banking playment
-    print("you choose internet banking")
+    print("\nYou choose internet banking")
     print("scan this QR")
     print("this is QR.jpg not text")
     print("are you done with payment")
     answer = input("(yes/no) : ")
     if answer == "yes":
-        print(f"complete booking {tm.get_temp}") # make user know that they already complete booking
-        room.roomStatus[tm.get_temp] = False # set status to false
+        print(f"complete booking {tm.get_temp()}") # make user know that they already complete booking
+        room.roomStatus[tm.get_temp()] = False # set status to false
     elif answer == "no":
         print("Are you really going to cancel the payment")
         answert = input("yes/no : ")
@@ -114,9 +117,9 @@ def internetbanking(): # this is for internet banking playment
         internetbanking()
 
 def memberP(): # for people who use member point for payment
-    print("you choosing member point payment")
-    print("you need to enter id and password first")
-    print("enter 99 to id to cancel everything")
+    print("\nYou choosing member point payment")
+    print("You need to enter id and password first")
+    print("Enter 99 to id to cancel everything")
 
     id = input("ID : ") # enter ID
     password = input(int("Password : ")) # enter password
@@ -143,7 +146,7 @@ def memberP(): # for people who use member point for payment
         memberP()
 
 def payment(): # select payment for self booking user
-    print("Choose Payment for booking this room")
+    print("\nChoose Payment for booking this room")
     print("300 Bath for Money")
     print("10 point for Member")
     print("")
@@ -163,6 +166,7 @@ def payment(): # select payment for self booking user
         payment()
 
 def room_booking(): #self booking
+    showAllTrueRoom()
     print("You are in room booking right now")
     print("Enter 99 to go back to main menu")
     rbooking = input("Which room you wanna booking : ")
@@ -172,8 +176,9 @@ def room_booking(): #self booking
         yon = input("(yes/no) : ")
 
         if yon == "yes":
-            set_temp(rbooking)
+            tm.set_temp(rbooking)
             print(f"you booking {rbooking}")
+            payment()
 
         elif yon == "no":
             print(f"you cancel booking {rbooking}")
