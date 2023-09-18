@@ -11,6 +11,10 @@ def showAll(): #this is show all the room that we have
 
 def showAllTrueRoom():
     number = 1 
+    tm.check_true()
+    for element in tm.temp_array:
+        print(number , end = "")
+        print(element)
     
 
 def add(): # this is function write to add new room to array and dict on allRoom.py
@@ -140,6 +144,9 @@ def memberP(): # for people who use member point for payment
 
 def payment(): # select payment for self booking user
     print("Choose Payment for booking this room")
+    print("300 Bath for Money")
+    print("10 point for Member")
+    print("")
     print("1 Internet Banking")
     print("2 Member Point")
     print("Enter 99 to go back to main menu")
@@ -179,6 +186,7 @@ def room_booking(): #self booking
 
     else:
         print("Invalid variable")
+        room_booking()
 
 def staff_ui(): # just staff text interface
     print("## Welcome to Staff UI ##")
