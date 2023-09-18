@@ -122,7 +122,7 @@ def memberP(): # for people who use member point for payment
     print("Enter 99 to id to cancel everything")
 
     id = input("ID : ") # enter ID
-    password = input(int("Password : ")) # enter password
+    password = input("Password : ") # enter password
 
     if id in mem.member: # check id which thatin array of ID or not
         if mem.member[id] in password: # same as ID but password
@@ -157,7 +157,7 @@ def payment(): # select payment for self booking user
 
     if payment == "1": # 1 go to internet banking
         internetbanking()
-    elif paymnet == "2": # 2 go to memberpoint payment
+    elif payment == "2": # 2 go to memberpoint payment
         memberP()
     elif payment == "99":
         user_ui()
