@@ -74,6 +74,9 @@ def checkOut(): # same as check in but this time when user are check out
 
         staff_ui()# make programstill runing by going back to staff page
 
+    elif CheckO == '99':
+        staff_ui()
+
     else:
         print("Invalid variable")
         checkOut()
